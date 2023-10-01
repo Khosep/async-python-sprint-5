@@ -23,7 +23,8 @@ from src.main import app
 from src.models.base import Base
 from src.models.file_model import File as FileModel
 from src.models.user_model import User as UserModel
-from tests.settings import test_settings
+from .settings import test_settings
+
 
 TEST_URL = f'http://test'
 TEST_STORAGE = 'test_storage'
@@ -86,7 +87,6 @@ class Prepare:
     async def is_database_exists(self) -> bool:
         try:
             conn = await asyncpg.connect(self.test_dsn_connect)
-
         except InvalidCatalogNameError:
             logging.error('InvalidCatalogNameError')
             return False
@@ -136,7 +136,7 @@ async def get_user_id_test_client(db: AsyncSession) -> UUID:
 
 @pytest.fixture(scope='session', autouse=True)
 async def create_storage_path():
-    storage_path = Path('tests/test_storage')
+    storage_path = Path(__file__).resolve().parent / 'test_storage'
     storage_path.mkdir(exist_ok=True)
 
     yield storage_path
