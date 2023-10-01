@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:14.6
+    container_name: pg-storage
+    ports:
+      - "5437:${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file: .env
+
+  web:
+    build:
+      context: .
+    container_name: web-storage
+    command: sh -c "cd ./src && alembic upgrade head && cd .. && uvicorn src.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "${PROJECT_PORT}:8000"
+    volumes:
+      - ./storage:/code/storage
+    env_file: .env
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
