@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 from pydantic import BaseModel, PostgresDsn, DirectoryPath, Field
@@ -47,7 +48,6 @@ class AppSettings(BaseSettings):
     docs_url: str = '/api/openapi'
     openapi_url: str = '/api/openapi.json'
 
-    # TODO Создать каталог 'storage' в докере (не скопировать, а создать)
     storage_path: DirectoryPath = pathlib.Path(BASE_DIR.parent, 'storage')
 
     token_expire_minutes: int = 60

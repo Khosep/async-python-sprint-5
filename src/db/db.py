@@ -6,8 +6,6 @@ from src.core.config import app_settings
 engine = create_async_engine(app_settings.database_dsn, echo=True, future=True)
 async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 
-print(app_settings.database_dsn)
-
 
 async def get_session() -> AsyncSession:
     async with async_session() as session:

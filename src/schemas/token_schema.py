@@ -8,9 +8,5 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
-#TODO Delete
-class TokenData(BaseModel):
-    username: str | None = None
-
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=app_settings.prefix + "/auth")

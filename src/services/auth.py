@@ -25,12 +25,8 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)],
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-        # TODO Delete
-        # token_data = TokenData(username=username)
     except (JWTError, ValidationError):
         raise credentials_exception
-    # TODO Delete
-    # username_obj = Username(username=token_data.username)
     username_obj = Username(username=username)
     user = await user_service.get_user(db=db, username=username_obj)
     if user is None:
