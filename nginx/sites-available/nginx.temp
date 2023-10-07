@@ -6,7 +6,7 @@ server {
     root /code/storage;
 
     location @backend {
-        proxy_pass http://${PROJECT_HOST}:${PROJECT_PORT};
+        proxy_pass http://${NGINX_PROXY}:${PROJECT_PORT};
     }
 
     location / {

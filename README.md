@@ -18,6 +18,10 @@ docker-compose up --build -d
 docker-compose exec web pytest
 ```
 ---
+### Проект на YandexCloud
+[FileStorage](http://51.250.107.244:8080) <-- Нажать необходимо
+
+---
 ## Документация
 После запуска проекта доступна документация Swagger (/api/openapi)
 
