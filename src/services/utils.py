@@ -64,8 +64,3 @@ def execution_time(func):
 
     return wrapper
 
-
-# TODO to use or not to use?
-@lru_cache()
-def get_settings():
-    return AppSettings()

@@ -32,10 +32,6 @@ class Repository(ABC):
     async def get_multi(self, *args, **kwargs):
         raise NotImplementedError
 
-    # @abstractmethod
-    # async def get_count(self, *args, **kwargs):
-    #     raise NotImplementedError
-
     @abstractmethod
     async def update(self, *args, **kwargs):
         raise NotImplementedError
@@ -47,7 +43,6 @@ CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel)
 UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
 
 
-# TODO Check and delete if not used (also in abstract class (above))
 class SQLAlchemyRepository(Repository, Generic[ModelType, DBFieldsType, CreateSchemaType, UpdateSchemaType]):
     model = None
 
@@ -89,16 +84,6 @@ class SQLAlchemyRepository(Repository, Generic[ModelType, DBFieldsType, CreateSc
         stmt = select(self.model).where(and_(*conditions)).offset(offset).limit(limit)
         results = await db.execute(statement=stmt)
         return results.scalars().all()
-
-    # async def get_count(self, db: AsyncSession, db_obj: ModelType | dict) -> int:
-    #     if not isinstance(db_obj, dict):
-    #         # db_obj = await get_dict_from_sqlalchemy_row(db_obj)
-    #         pass
-    #
-    #     conditions = [getattr(self.model, k) == v for k, v in db_obj.items()]
-    #     stmt = select(func.count()).where(and_(*conditions))
-    #     result = await db.execute(statement=stmt)
-    #     return result.scalar()
 
     async def update(self, db: AsyncSession, db_obj: ModelType, obj_in: UpdateSchemaType | Dict[str, Any]
                      ) -> Optional[ModelType]:

@@ -6,7 +6,7 @@ server {
     root /code/storage;
 
     location @backend {
-        proxy_pass http://172.168.1.1:8080;
+        proxy_pass http://${PROJECT_HOST}:${PROJECT_PORT};
     }
 
     location / {
