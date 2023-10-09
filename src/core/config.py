@@ -47,6 +47,8 @@ class AppSettings(BaseSettings):
     docs_url: str = '/api/openapi'
     openapi_url: str = '/api/openapi.json'
 
+    large_file_size: int = 1024 * 1024
+
     storage_path: DirectoryPath = pathlib.Path(BASE_DIR.parent, 'storage')
 
     token_expire_minutes: int = 60

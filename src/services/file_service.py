@@ -7,7 +7,7 @@ from fastapi import UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.core.config import PaginationParams
+from src.core.config import PaginationParams, app_settings
 from src.exceptions import FileNotFoundException, ValidationException
 from src.models.file_model import File as FileModel
 from src.schemas.file_schema import FileCreate, FileUpdateSize, FileIn, FileInDB, FileID
@@ -68,15 +68,15 @@ class FileService:
         file_stat = await file_path.stat()
         file_size = file_stat.st_size
 
-        if file_size < 1024 * 1024:
+        if file_size < app_settings.large_file_size:
             logging.info(f'FileResponse for {filename} (size:{file_size})')
             return FileResponse(file_path, filename=filename)
-        else:
-            logging.info(f'StreamingResponse for {filename} (size:{file_size})')
-            headers = {'Content-Disposition': f'attachment; filename="{filename}"'}
-            return StreamingResponse(content=file_chunk_generator(file_path),
-                                     media_type="application/octet-stream",
-                                     headers=headers)
+
+        logging.info(f'StreamingResponse for {filename} (size:{file_size})')
+        headers = {'Content-Disposition': f'attachment; filename="{filename}"'}
+        return StreamingResponse(content=file_chunk_generator(file_path),
+                                 media_type="application/octet-stream",
+                                 headers=headers)
 
     async def get_list_info(self, db: AsyncSession, user_id: UUID, page_params: PaginationParams) -> dict[str, Any]:
         file_list = await self.repo.get_multi(db=db,

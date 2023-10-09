@@ -11,3 +11,5 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
+CMD ./web_start.sh
+

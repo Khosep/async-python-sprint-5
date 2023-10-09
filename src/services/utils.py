@@ -1,11 +1,10 @@
 import time
-from functools import lru_cache
 
 import bcrypt
 from aiopath import AsyncPath
 from fastapi import UploadFile
 
-from src.core.config import AppSettings, app_settings
+from src.core.config import app_settings
 
 
 async def create_hashed_password(password: str) -> str:

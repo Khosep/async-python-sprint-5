@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.db import get_session
 from src.exceptions import UserInactiveException
-from src.models.user_model import User
+from src.models.user_model import User as UserModel
 from src.schemas.token_schema import Token
 from src.schemas.user_schema import UserIn, UserOut
 from src.services.user_service import user_service
@@ -20,7 +20,7 @@ async def register_user(
         *,
         db: AsyncSession = Depends(get_session),
         user: UserIn
-) -> User:
+) -> UserModel:
     # create user in DB
     new_user = await user_service.create_user_in_db(db=db, user=user)
     return new_user
