@@ -1,5 +1,4 @@
-# Приложение для хранения файлов
-### (учебный проект курса "Асинхронное программирование")  
+# Асинхронное приложение для хранения файлов
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
@@ -19,7 +18,7 @@ docker-compose exec web pytest
 ```
 ---
 ### Проект на YandexCloud
-[FileStorage](http://51.250.107.244:8080) <-- Нажать необходимо
+[FileStorage](http://51.250.107.244:8080) <-- Нажать необходимо (Неактуально)
 
 ---
 ## Документация
@@ -30,7 +29,7 @@ docker-compose exec web pytest
 ## Описание
 
 Асинхронный `http`-сервис, обрабатывающий поступающие запросы,
-так или иначе связанные с выполнением загрузки файлов в хранилище и скачивания их оттуда,
+так или иначе связанные с выполнением а) загрузки файлов в хранилище и б) скачивания их оттуда,
 в том числе запросы по регистрации и авторизации пользователей хранилища.
 Сервер стартует по адресу `http://127.0.0.1:8080` (дефолтное значение, может быть изменено).
 
@@ -175,12 +174,3 @@ docker-compose exec web pytest
 
 </details>
 
-## Требования к решению
-
-1. В качестве СУБД используйте PostgreSQL (не ниже 10 версии).
-2. Опишите [docker-compose](docker-compose.yml) для разработки и локального тестирования сервисов.
-3. Используйте концепции ООП.
-4. Предусмотрите обработку исключительных ситуаций.
-5. Приведите стиль кода в соответствие pep8, flake8, mypy.
-6. Логируйте результаты действий.
-7. Покройте написанный код тестами.
